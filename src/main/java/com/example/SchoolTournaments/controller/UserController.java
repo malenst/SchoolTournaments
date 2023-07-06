@@ -13,8 +13,11 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/users")
 public class UserController {
 
-    @Autowired
-    private UserService userService;
+    private final UserService userService;
+
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
 
     @GetMapping
     public Page<UserModel> getAllUsers(
@@ -38,15 +41,7 @@ public class UserController {
 
     @PutMapping("/{id}")
     public UserModel updateUser(@PathVariable Long id, @RequestBody UserModel updatedUser) {
-        UserModel user = userService.findById(id);
-        user.setName(updatedUser.getName());
-        user.setLastName(updatedUser.getLastName());
-        user.setPatronymic(updatedUser.getPatronymic());
-        user.setSchool(updatedUser.getSchool());
-        user.setGrade(updatedUser.getGrade());
-        user.setCity(updatedUser.getCity());
-        user.setEmail(updatedUser.getEmail());
-        return userService.save(user);
+        return userService.update(updatedUser, id);
     }
 
     @DeleteMapping("/{id}")

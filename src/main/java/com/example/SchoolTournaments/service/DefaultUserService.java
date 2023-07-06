@@ -7,11 +7,16 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class DefaultUserService implements UserService {
 
-    @Autowired
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
+
+    public DefaultUserService(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     @Override
     public Page<UserModel> findAll(Pageable pageable) {
@@ -26,6 +31,25 @@ public class DefaultUserService implements UserService {
     @Override
     public UserModel save(UserModel user) {
         return userRepository.save(user);
+    }
+
+    @Override
+    public UserModel update(UserModel user, Long id) {
+        Optional<UserModel> userFromDBOptional = userRepository.findById(id);
+        if (userFromDBOptional.isPresent()) {
+            UserModel userFromDB = userFromDBOptional.get();
+            userFromDB.setName(user.getName());
+            userFromDB.setLastName(user.getLastName());
+            userFromDB.setPatronymic(user.getPatronymic());
+            userFromDB.setBirthDay(user.getBirthDay());
+            userFromDB.setSchool(user.getSchool());
+            userFromDB.setGrade(user.getGrade());
+            userFromDB.setCity(user.getCity());
+            userFromDB.setEmail(user.getEmail());
+            return userRepository.save(userFromDB);
+        } else {
+            return null;
+        }
     }
 
     @Override

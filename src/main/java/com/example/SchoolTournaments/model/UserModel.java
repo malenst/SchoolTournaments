@@ -1,9 +1,11 @@
 package com.example.SchoolTournaments.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
+import java.time.LocalDate;
 
 @Entity
 public class UserModel {
@@ -14,8 +16,18 @@ public class UserModel {
     private String name;
     private String lastName;
     private String patronymic;
+    private LocalDate birthDay;
     private String school;
     private String grade;
+
+    public LocalDate getBirthDay() {
+        return birthDay;
+    }
+
+    public void setBirthDay(LocalDate birthDay) {
+        this.birthDay = birthDay;
+    }
+
     private String city;
     private String email;
 
@@ -83,11 +95,12 @@ public class UserModel {
         this.email = email;
     }
 
-    public UserModel(Long id, String name, String lastName, String patronymic, String school, String grade, String city, String email) {
+    public UserModel(Long id, String name, String lastName, String patronymic, LocalDate birthDay, String school, String grade, String city, String email) {
         this.id = id;
         this.name = name;
         this.lastName = lastName;
         this.patronymic = patronymic;
+        this.birthDay = birthDay;
         this.school = school;
         this.grade = grade;
         this.city = city;

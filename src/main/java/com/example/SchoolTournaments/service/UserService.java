@@ -8,7 +8,7 @@ public interface UserService {
     Page<UserModel> findAll(Pageable pageable);
     UserModel findById(Long id);
     UserModel save(UserModel user);
+    UserModel update(UserModel user, Long id);
     void deleteById(Long id);
-
 
 }
