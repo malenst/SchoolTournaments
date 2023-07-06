@@ -13,7 +13,7 @@ public class SwaggerConfig {
     public OpenAPI api() {
         return new OpenAPI()
                 .info(new Info().title("Tournament System API")
-                        .description("Spring shop sample application")
-                        .version("v0.0.1"));
+                        .description("Documentation for API endpoints")
+                        .version("v1.0.0"));
     }
 }
