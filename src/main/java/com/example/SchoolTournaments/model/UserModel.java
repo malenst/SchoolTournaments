@@ -1,6 +1,7 @@
 package com.example.SchoolTournaments.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -9,17 +10,26 @@ import jakarta.persistence.Id;
 import java.time.LocalDate;
 
 @Entity
+@Schema(description = "User of product")
 public class UserModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Schema(description = "Unique user ID")
     private Long id;
+    @Schema(description = "First name of user")
     private String name;
+    @Schema(description = "Last name of user")
     private String lastName;
+    @Schema(description = "Patronymic of user")
+
     private String patronymic;
+    @Schema(description = "User's date of birth")
     @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate birthDay;
+    @Schema(description = "User's school")
     private String school;
+    @Schema(description = "User's grade of the school")
     private String grade;
 
     public LocalDate getBirthDay() {
@@ -30,8 +40,11 @@ public class UserModel {
         this.birthDay = birthDay;
     }
 
+    @Schema(description = "User's city")
     private String city;
+    @Schema(description = "User's email")
     private String email;
+    @Schema(description = "User's phone number")
     private String phoneNumber;
 
     public String getPhoneNumber() {
