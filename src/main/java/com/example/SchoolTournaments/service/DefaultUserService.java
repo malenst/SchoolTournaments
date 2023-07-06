@@ -46,6 +46,7 @@ public class DefaultUserService implements UserService {
             userFromDB.setGrade(user.getGrade());
             userFromDB.setCity(user.getCity());
             userFromDB.setEmail(user.getEmail());
+            userFromDB.setPhoneNumber(user.getPhoneNumber());
             return userRepository.save(userFromDB);
         } else {
             return null;

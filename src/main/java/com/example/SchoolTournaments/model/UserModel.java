@@ -1,5 +1,6 @@
 package com.example.SchoolTournaments.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -16,6 +17,7 @@ public class UserModel {
     private String name;
     private String lastName;
     private String patronymic;
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate birthDay;
     private String school;
     private String grade;
@@ -30,6 +32,15 @@ public class UserModel {
 
     private String city;
     private String email;
+    private String phoneNumber;
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
 
     public Long getId() {
         return id;
@@ -95,7 +106,7 @@ public class UserModel {
         this.email = email;
     }
 
-    public UserModel(Long id, String name, String lastName, String patronymic, LocalDate birthDay, String school, String grade, String city, String email) {
+    public UserModel(Long id, String name, String lastName, String patronymic, LocalDate birthDay, String school, String grade, String city, String email, String phoneNumber) {
         this.id = id;
         this.name = name;
         this.lastName = lastName;
@@ -105,6 +116,7 @@ public class UserModel {
         this.grade = grade;
         this.city = city;
         this.email = email;
+        this.phoneNumber = phoneNumber;
     }
     public UserModel() {}
 }
