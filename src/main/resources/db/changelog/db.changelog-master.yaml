@@ -1,0 +1,51 @@
+databaseChangeLog:
+  - logicalFilePath: db/changelog/db.changelog-master.yaml
+  - changeSet:
+      id: 1
+      author: malenst
+      changes:
+        - createTable:
+            tableName: users
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: last_name
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: patronymic
+                  type: varchar(50)
+              - column:
+                  name: birthday
+                  type: DATE 'MM/DD/YYYY'
+              - column:
+                  name: school
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: grade
+                  type: varchar(50)
+              - column:
+                  name: city
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: email
+                  type: varchar(100)
+              - column:
+                  name: phone_number
+                  type: varchar(20)

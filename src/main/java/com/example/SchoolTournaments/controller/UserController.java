@@ -1,10 +1,9 @@
 package com.example.SchoolTournaments.controller;
 
 import com.example.SchoolTournaments.service.UserService;
-import com.example.SchoolTournaments.model.UserModel;
+import com.example.SchoolTournaments.model.UserEntity;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -23,7 +22,7 @@ public class UserController {
 
     @GetMapping
     @Operation(summary = "Get all users")
-    public Page<UserModel> getAllUsers(
+    public Page<UserEntity> getAllUsers(
             @Parameter(description = "Page number", example = "0", required = false) @RequestParam(defaultValue = "0") Integer pageNo,
             @Parameter(description = "Page size", example = "10", required = false) @RequestParam(defaultValue = "10") Integer pageSize,
             @Parameter(description = "Field to sort by", example = "id", required = false) @RequestParam(defaultValue = "id") String sortBy
@@ -34,19 +33,19 @@ public class UserController {
 
     @GetMapping("/{id}")
     @Operation(summary = "Get user by id")
-    public UserModel getUserById(@Parameter(description = "User ID", example = "1L", required = true) @PathVariable Long id) {
+    public UserEntity getUserById(@Parameter(description = "User ID", example = "1L", required = true) @PathVariable Long id) {
         return userService.findById(id);
     }
 
     @PostMapping
     @Operation(summary = "Create user")
-    public UserModel createUser(@Parameter(description = "User's data", required = true)@RequestBody UserModel user) {
+    public UserEntity createUser(@Parameter(description = "User's data", required = true)@RequestBody UserEntity user) {
         return userService.save(user);
     }
 
     @PutMapping("/{id}")
     @Operation(summary = "Update user's data")
-    public UserModel updateUser(@Parameter(description = "User ID", example = "1L", required = true) @PathVariable Long id, @Parameter(description = "User with changed data", required = true) @RequestBody UserModel updatedUser) {
+    public UserEntity updateUser(@Parameter(description = "User ID", example = "1L", required = true) @PathVariable Long id, @Parameter(description = "User with changed data", required = true) @RequestBody UserEntity updatedUser) {
         return userService.update(updatedUser, id);
     }
 

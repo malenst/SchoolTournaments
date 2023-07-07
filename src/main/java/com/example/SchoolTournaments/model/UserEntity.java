@@ -2,16 +2,13 @@ package com.example.SchoolTournaments.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.time.LocalDate;
 
-@Entity
+@Entity(name = "users")
 @Schema(description = "User of product")
-public class UserModel {
+public class UserEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -119,7 +116,7 @@ public class UserModel {
         this.email = email;
     }
 
-    public UserModel(Long id, String name, String lastName, String patronymic, LocalDate birthDay, String school, String grade, String city, String email, String phoneNumber) {
+    public UserEntity(Long id, String name, String lastName, String patronymic, LocalDate birthDay, String school, String grade, String city, String email, String phoneNumber) {
         this.id = id;
         this.name = name;
         this.lastName = lastName;
@@ -131,5 +128,5 @@ public class UserModel {
         this.email = email;
         this.phoneNumber = phoneNumber;
     }
-    public UserModel() {}
+    public UserEntity() {}
 }

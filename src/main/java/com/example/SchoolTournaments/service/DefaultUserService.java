@@ -1,8 +1,7 @@
 package com.example.SchoolTournaments.service;
 
-import com.example.SchoolTournaments.model.UserModel;
+import com.example.SchoolTournaments.model.UserEntity;
 import com.example.SchoolTournaments.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -19,25 +18,25 @@ public class DefaultUserService implements UserService {
     }
 
     @Override
-    public Page<UserModel> findAll(Pageable pageable) {
+    public Page<UserEntity> findAll(Pageable pageable) {
         return userRepository.findAll(pageable);
     }
 
     @Override
-    public UserModel findById(Long id) {
+    public UserEntity findById(Long id) {
         return userRepository.findById(id).orElseThrow(() -> new RuntimeException("User not found"));
     }
 
     @Override
-    public UserModel save(UserModel user) {
+    public UserEntity save(UserEntity user) {
         return userRepository.save(user);
     }
 
     @Override
-    public UserModel update(UserModel user, Long id) {
-        Optional<UserModel> userFromDBOptional = userRepository.findById(id);
+    public UserEntity update(UserEntity user, Long id) {
+        Optional<UserEntity> userFromDBOptional = userRepository.findById(id);
         if (userFromDBOptional.isPresent()) {
-            UserModel userFromDB = userFromDBOptional.get();
+            UserEntity userFromDB = userFromDBOptional.get();
             userFromDB.setName(user.getName());
             userFromDB.setLastName(user.getLastName());
             userFromDB.setPatronymic(user.getPatronymic());

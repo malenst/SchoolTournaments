@@ -1,14 +1,14 @@
 package com.example.SchoolTournaments.service;
 
-import com.example.SchoolTournaments.model.UserModel;
+import com.example.SchoolTournaments.model.UserEntity;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 public interface UserService {
-    Page<UserModel> findAll(Pageable pageable);
-    UserModel findById(Long id);
-    UserModel save(UserModel user);
-    UserModel update(UserModel user, Long id);
+    Page<UserEntity> findAll(Pageable pageable);
+    UserEntity findById(Long id);
+    UserEntity save(UserEntity user);
+    UserEntity update(UserEntity user, Long id);
     void deleteById(Long id);
 
 }
