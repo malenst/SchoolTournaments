@@ -1,6 +1,6 @@
 package com.example.SchoolTournaments.controller;
 
-import com.example.SchoolTournaments.model.UserEntity;
+import com.example.SchoolTournaments.entity.UserEntity;
 import com.example.SchoolTournaments.service.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.json.JsonMapper;

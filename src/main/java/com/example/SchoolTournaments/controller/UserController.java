@@ -1,7 +1,7 @@
 package com.example.SchoolTournaments.controller;
 
 import com.example.SchoolTournaments.service.UserService;
-import com.example.SchoolTournaments.model.UserEntity;
+import com.example.SchoolTournaments.entity.UserEntity;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import org.springframework.data.domain.Page;
@@ -11,7 +11,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/admin/users")
 public class UserController {
 
     private final UserService userService;

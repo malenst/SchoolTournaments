@@ -1,14 +1,18 @@
-package com.example.SchoolTournaments.model;
+package com.example.SchoolTournaments.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.LocalDate;
+import java.util.Collection;
+import java.util.Set;
 
 @Entity(name = "users")
 @Schema(description = "User of product")
-public class UserEntity {
+public class UserEntity implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,9 +22,12 @@ public class UserEntity {
     private String name;
     @Schema(description = "Last name of user")
     private String lastName;
+
     @Schema(description = "Patronymic of user")
 
     private String patronymic;
+    @Schema(description = "Unique username")
+    private String username;
     @Schema(description = "User's date of birth")
     @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate birthDay;
@@ -29,13 +36,8 @@ public class UserEntity {
     @Schema(description = "User's grade of the school")
     private String grade;
 
-    public LocalDate getBirthDay() {
-        return birthDay;
-    }
-
-    public void setBirthDay(LocalDate birthDay) {
-        this.birthDay = birthDay;
-    }
+    @Schema(description = "User's password")
+    private String password;
 
     @Schema(description = "User's city")
     private String city;
@@ -43,6 +45,26 @@ public class UserEntity {
     private String email;
     @Schema(description = "User's phone number")
     private String phoneNumber;
+
+    @Enumerated(EnumType.STRING)
+    @ElementCollection
+    private Set<Role> roles;
+
+    public String getUserName() {
+        return username;
+    }
+
+    public void setUserName(String userName) {
+        this.username = userName;
+    }
+
+    public LocalDate getBirthDay() {
+        return birthDay;
+    }
+
+    public void setBirthDay(LocalDate birthDay) {
+        this.birthDay = birthDay;
+    }
 
     public String getPhoneNumber() {
         return phoneNumber;
@@ -116,11 +138,12 @@ public class UserEntity {
         this.email = email;
     }
 
-    public UserEntity(Long id, String name, String lastName, String patronymic, LocalDate birthDay, String school, String grade, String city, String email, String phoneNumber) {
+    public UserEntity(Long id, String name, String lastName, String patronymic, String userName, LocalDate birthDay, String school, String grade, String city, String email, String phoneNumber) {
         this.id = id;
         this.name = name;
         this.lastName = lastName;
         this.patronymic = patronymic;
+        this.username = username;
         this.birthDay = birthDay;
         this.school = school;
         this.grade = grade;
@@ -129,4 +152,50 @@ public class UserEntity {
         this.phoneNumber = phoneNumber;
     }
     public UserEntity() {}
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return getRoles();
+    }
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
+
+    @Override
+    public String getPassword() {
+        return null;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    @Override
+    public String getUsername() {
+        return null;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
 }

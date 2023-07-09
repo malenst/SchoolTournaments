@@ -4,6 +4,11 @@ databaseChangeLog:
       id: 1
       author: malenst
       changes:
+        - preConditions:
+            onFail: MARK_RAN
+            not:
+              tableExists:
+                tableName: users
         - createTable:
             tableName: users
             columns:
