@@ -1,5 +1,6 @@
 package com.example.SchoolTournaments.controller;
 
+import com.example.SchoolTournaments.repository.UserRepository;
 import com.example.SchoolTournaments.service.UserService;
 import com.example.SchoolTournaments.entity.UserEntity;
 import io.swagger.v3.oas.annotations.Operation;
@@ -10,14 +11,18 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/admin/users")
 public class UserController {
 
     private final UserService userService;
+    private final UserRepository userRepository;
 
-    public UserController(UserService userService) {
+    public UserController(UserService userService, UserRepository userRepository) {
         this.userService = userService;
+        this.userRepository = userRepository;
     }
 
     @GetMapping
@@ -35,6 +40,10 @@ public class UserController {
     @Operation(summary = "Get user by id")
     public UserEntity getUserById(@Parameter(description = "User ID", example = "1L", required = true) @PathVariable Long id) {
         return userService.findById(id);
+    }
+    @GetMapping("/search")
+    public List<UserEntity> searchUser(String input) {
+        return userRepository.search(input);
     }
 
     @PostMapping
