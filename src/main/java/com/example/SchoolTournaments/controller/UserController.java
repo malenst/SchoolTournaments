@@ -46,6 +46,11 @@ public class UserController {
         return userRepository.search(input);
     }
 
+    @GetMapping("/search/{criteria}")
+    public List<UserEntity> searchUserByCriteria(String input, @PathVariable String criteria) {
+        return userRepository.searchByCriteria(input, criteria);
+    }
+
     @PostMapping
     @Operation(summary = "Create user")
     public UserEntity createUser(@Parameter(description = "User's data", required = true)@RequestBody UserEntity user) {

@@ -41,19 +41,22 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         return userRepository.findById(id).orElseThrow(() -> new RuntimeException("User not found"));
     }
 
-
+    public List<UserEntity> searchUsers(String searchParam, String searchValue) {
+        return userRepository.searchByCriteria(searchParam, searchValue);
+    }
 
     @Override
     public UserEntity save(UserEntity user) {
         UserEntity userFromDB = userRepository.findByUsername(user.getUsername());
         if (userFromDB != null) {
-            return userFromDB;
+            return null;
         }
-
+        System.out.println(user.getPassword());
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
 
         return userRepository.save(user);
     }
+
 
     @Override
     public UserEntity update(UserEntity user, Long id) {
@@ -84,6 +87,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     public List<UserEntity> search(String fragment) {
         return null;
     }
+
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

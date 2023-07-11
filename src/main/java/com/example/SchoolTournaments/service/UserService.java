@@ -14,4 +14,5 @@ public interface UserService {
     UserEntity update(UserEntity user, Long id);
     void deleteById(Long id);
     List<UserEntity> search(String fragment);
+
 }

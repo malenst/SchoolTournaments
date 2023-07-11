@@ -9,7 +9,8 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface UserRepository extends JpaRepository<UserEntity, Long> {
+public interface UserRepository extends JpaRepository<UserEntity, Long>, UserRepositoryForSearch {
+    List<UserEntity> searchByCriteria(String searchParam, String searchValue);
     UserEntity findByUsername(String username);
     @Query("SELECT u FROM users u WHERE " +
             "u.name LIKE %:fragment% OR " +

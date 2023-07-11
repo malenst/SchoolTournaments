@@ -167,7 +167,7 @@ public class UserEntity implements UserDetails {
 
     @Override
     public String getPassword() {
-        return null;
+        return this.password;
     }
 
     public void setPassword(String password) {
@@ -176,7 +176,7 @@ public class UserEntity implements UserDetails {
 
     @Override
     public String getUsername() {
-        return null;
+        return this.username;
     }
 
     @Override
