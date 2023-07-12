@@ -8,7 +8,7 @@ import java.util.Set;
 
 
 public enum Role implements GrantedAuthority {
-    ADMIN,
+    ADMINISTRATOR,
     TEACHER,
     SCHOOLBOY;
 

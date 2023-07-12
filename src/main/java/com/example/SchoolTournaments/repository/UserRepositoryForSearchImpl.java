@@ -21,7 +21,7 @@ public class UserRepositoryForSearchImpl implements UserRepositoryForSearch {
     }
 
     @Override
-    public List<UserEntity> searchByCriteria(String fragmentOfSearch, String searchParam) {
+    public List<UserEntity> searchByCriteria(String searchParam, String fragmentOfSearch) {
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
         CriteriaQuery<UserEntity> query = cb.createQuery(UserEntity.class);
         Root<UserEntity> user = query.from(UserEntity.class);
@@ -37,12 +37,12 @@ public class UserRepositoryForSearchImpl implements UserRepositoryForSearch {
             case "fcs":
                 String[] fcsValues = fragmentOfSearch.split(" ");
                 String lastName = fcsValues[0];
-                String firstName = fcsValues[1];
+                String name = fcsValues[1];
                 String patronymic = fcsValues[2];
 
                 condition = cb.and(
                         cb.like(user.get("lastName"), "%" + lastName + "%"),
-                        cb.like(user.get("firstName"), "%" + firstName + "%"),
+                        cb.like(user.get("name"), "%" + name + "%"),
                         cb.like(user.get("patronymic"), "%" + patronymic + "%"));
                         break;
             default:

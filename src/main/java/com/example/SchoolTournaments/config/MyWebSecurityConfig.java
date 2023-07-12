@@ -44,9 +44,25 @@ public class MyWebSecurityConfig {
         return httpSecurity.build();
     }
 
+  /*  @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        http
+                .authorizeHttpRequests((requests) -> requests
+                        .anyRequest().authenticated()
+                )
+                .formLogin((form) -> form
+                        .loginPage("/login")
+                        .permitAll()
+                )
+                .logout((logout) -> logout.permitAll());
+
+        return http.build();
+    }*/
+
     @Bean
     public UserDetailsService usersMethod() {
-        UserDetails user = User.builder()
+        return userServiceImpl;
+        /*UserDetails user = User.builder()
                 .username("user")
                 .password(passwordEncoder().encode("user"))
                 .roles("USER")
@@ -54,9 +70,9 @@ public class MyWebSecurityConfig {
         UserDetails admin = User.builder()
                 .username("admin")
                 .password(passwordEncoder().encode("admin"))
-                .roles("ADMIN")
+                .roles("ADMINISTRATOR")
                 .build();
-        return new InMemoryUserDetailsManager(user, admin);
+        return new InMemoryUserDetailsManager(user, admin);*/
     }
 
     @Bean
@@ -64,14 +80,33 @@ public class MyWebSecurityConfig {
         return new BCryptPasswordEncoder();
     }
 
+    @Autowired
+    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(usersMethod()).passwordEncoder(bCryptPasswordEncoder());
+    }
+
     /*
         @Autowired
         public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
             auth.userDetailsService(userServiceImpl).passwordEncoder(bCryptPasswordEncoder());
-        }*/
+        }
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(usersMethod()).passwordEncoder(passwordEncoder());
-    }
+        auth.userDetailsService(userDetailsService()).passwordEncoder(passwordEncoder());
+    }*/
+
+
+
+    /*@Bean
+    public UserDetailsService userDetailsService() {
+        UserDetails user =
+                User.withDefaultPasswordEncoder()
+                        .username("user")
+                        .password("password")
+                        .roles("USER")
+                        .build();
+
+        return new InMemoryUserDetailsManager(user);
+    }*/
 
 }

@@ -6,8 +6,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 class SchoolTournamentsApplicationTests {
 
-	@Test
-	void contextLoads() {
-	}
+    @Test
+    void contextLoads() {
+    }
 
 }

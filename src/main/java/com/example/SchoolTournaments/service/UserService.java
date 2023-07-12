@@ -4,8 +4,10 @@ import com.example.SchoolTournaments.entity.UserEntity;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
+
 
 public interface UserService {
     Page<UserEntity> findAll(Pageable pageable);

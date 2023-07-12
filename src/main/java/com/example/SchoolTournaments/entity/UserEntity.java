@@ -47,7 +47,7 @@ public class UserEntity implements UserDetails {
     private String phoneNumber;
 
     @Enumerated(EnumType.STRING)
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     private Set<Role> roles;
 
     public String getUserName() {

@@ -33,7 +33,7 @@ databaseChangeLog:
                   name: patronymic
                   type: varchar(50)
               - column:
-                  name: birthday
+                  name: birth_day
                   type: DATE 'MM/DD/YYYY'
               - column:
                   name: school
@@ -54,3 +54,13 @@ databaseChangeLog:
               - column:
                   name: phone_number
                   type: varchar(20)
+              - column:
+                  name: username
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: password
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
